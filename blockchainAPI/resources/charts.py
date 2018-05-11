@@ -16,3 +16,11 @@ class BlockchainAPIChart(object):
         self.period = chart.get('period')
         self.description = chart.get('description')
         self.values = chart.get('values')
+
+    def __str__(self):
+        chart = {
+            'classname': self.__class__.__name__,
+            'name': self.name,
+            'description': self.description,
+        }
+        return '<{classname} - {chart}: {description}>'.format(**chart)
