@@ -24,3 +24,11 @@ class BlockchainAPIChart(object):
             'description': self.description,
         }
         return '<{classname} - {chart}: {description}>'.format(**chart)
+
+    @property
+    def response(self):
+        response = {}
+        if self.chart is not None:
+            response = self.chart
+
+        return json.dumps(response)
