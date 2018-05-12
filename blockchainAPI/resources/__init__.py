@@ -7,4 +7,4 @@ __url__ = 'github.com/sdediego'
 __version__ = '1.0'
 __date__ = 'March 2018'
 
-__all__ = ['BlockchainAPIChart']
+__all__ = ['BlockchainAPIChart', 'BlockchainAPIStatistics']
