@@ -38,3 +38,11 @@ class BlockchainAPIStatistics(object):
     def __str__(self):
         return '<{classname} - Bitcoin blockchain statistics>'.format(
                 classname=self.__class__.__name__)
+
+    @property
+    def response(self):
+        response = {}
+        if self.stats is not None:
+            response = self.stats
+
+        return json.dumps(response)
