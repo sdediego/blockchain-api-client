@@ -34,3 +34,7 @@ class BlockchainAPIStatistics(object):
         self.trade_volume_btc = stats.get('trade_volume_btc')
         self.trade_volume_usd = stats.get('trade_volume_usd')
         self.timestamp = stats.get('timestamp')
+
+    def __str__(self):
+        return '<{classname} - Bitcoin blockchain statistics>'.format(
+                classname=self.__class__.__name__)
