@@ -36,11 +36,21 @@ class BlockchainAPIStatistics(object):
         self.timestamp = stats.get('timestamp')
 
     def __str__(self):
+        """
+        Represent class via params string.
+
+        :return str: class representarion.
+        """
         return '<{classname} - Bitcoin blockchain statistics>'.format(
                 classname=self.__class__.__name__)
 
     @property
     def response(self):
+        """
+        Get response from Blockchain API.
+
+        :return str: Blockchain API response.
+        """
         response = {}
         if self.stats is not None:
             response = self.stats
