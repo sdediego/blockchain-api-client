@@ -14,3 +14,11 @@ class BlockchainAPIPool(object):
 
     def __str__(self):
         return '<{} - Bitcoin pools>'.format(self.__class__.__name__)
+
+    def get_info(self, pool):
+        pool_name = list(filter(lambda name: name == pool, self._pools.keys()))
+        if len(pool_name) > 0:
+            var_name = pool_name[0].replace(" ", "").replace(".", "").lower()
+            return vars(self)['_{}'.format(var_name)]
+
+        return {}
