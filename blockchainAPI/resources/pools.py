@@ -26,3 +26,7 @@ class BlockchainAPIPool(object):
     @property
     def pools(self):
         return list(self._pools.keys())
+
+    @property
+    def response(self):
+        return json.dumps(self._pools)
