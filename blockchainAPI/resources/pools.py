@@ -22,3 +22,7 @@ class BlockchainAPIPool(object):
             return vars(self)['_{}'.format(var_name)]
 
         return {}
+
+    @property
+    def pools(self):
+        return list(self._pools.keys())
