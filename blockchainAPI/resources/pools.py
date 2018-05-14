@@ -11,3 +11,6 @@ class BlockchainAPIPool(object):
         for key, value in self._pools.items():
             var_name = key.replace(" ", "").replace(".", "").lower()
             setattr(self, '_{}'.format(var_name), {'pool': key, 'hashrate': value})
+
+    def __str__(self):
+        return '<{} - Bitcoin pools>'.format(self.__class__.__name__)
