@@ -13,3 +13,10 @@ class BaseError(Exception):
             msg += ': {exception}'.format(exception=self.code)
         self.msg = msg
         super(BaseError, self).__init__(self.msg)
+
+
+class BlockchainAPIClientError(BaseError):
+    """
+    Handle exception for Blockchain API.
+    """
+    pass
