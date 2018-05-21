@@ -36,3 +36,13 @@ class BlockchainAPIClient(object):
         else:
             msg = 'Section {} not found in {} file'.format(section, filename)
             raise BlockchainAPIClientError(msg)
+
+    def call(self, *args, **kwargs):
+        if self._api_data == 'charts' and 'chart' in kwargs:
+            self._api_url += '/{}'.format(kwargs.pop('chart'))
+
+        self._set_request_params(*args, **kwargs)
+        request = BlockchainAPIHttpRequest(self._api_url, self._request_params)
+        request_url, json_response = request.fetch_json_response()
+        request_result = BlockchainAPIHttpResponse(self._api_data, request_url, json_response)
+        return request_result
