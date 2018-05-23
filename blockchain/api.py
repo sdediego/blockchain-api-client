@@ -54,3 +54,7 @@ class BlockchainAPIClient(object):
         request_url, json_response = request.fetch_json_response()
         request_result = BlockchainAPIHttpResponse(self._api_data, request_url, json_response)
         return request_result
+
+
+class BlockchainAPIHttpRequest(object):
+    pass
