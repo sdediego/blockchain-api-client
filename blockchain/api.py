@@ -58,3 +58,7 @@ class BlockchainAPIClient(object):
 
 class BlockchainAPIHttpRequest(object):
     pass
+
+
+class BlockchainAPIHttpResponse(object):
+    pass
