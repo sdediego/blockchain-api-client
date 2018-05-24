@@ -62,6 +62,14 @@ class BlockchainAPIHttpRequest(object):
         self._api_url = api_url
         self._params = params
 
+    def __str__(self):
+        request = {
+            'classname': self.__class__.__name__,
+            'url': self._api_url,
+            'params': self._params,
+        }
+        return '<{classname}:\nurl: {url}\nparams: {params}>'.format(**request)
+
 
 class BlockchainAPIHttpResponse(object):
     pass
