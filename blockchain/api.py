@@ -57,7 +57,10 @@ class BlockchainAPIClient(object):
 
 
 class BlockchainAPIHttpRequest(object):
-    pass
+
+    def __init__(self, api_url=None, params=None):
+        self._api_url = api_url
+        self._params = params
 
 
 class BlockchainAPIHttpResponse(object):
