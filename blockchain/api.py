@@ -4,7 +4,7 @@
 import configparser
 import os
 
-from .exceptions import BlockchainAPIClientError
+from .exceptions import BlockchainAPIClientError, BlockchainAPIHttpRequestError
 
 
 class BlockchainAPIClient(object):
@@ -70,6 +70,15 @@ class BlockchainAPIHttpRequest(object):
         }
         return '<{classname}:\nurl: {url}\nparams: {params}>'.format(**request)
 
+    def fetch_json_response(self):
+        if self._api_url is not None and self._params is not None:
+            http_response = self._https_request()
+            request_url = http_response.url
+            json_response = http_response.json()
+            return request_url, json_response
+        else:
+            msg = 'Error: API URL and parameters must be provided.'
+            raise BlockchainAPIHttpRequestError(msg)
 
 class BlockchainAPIHttpResponse(object):
     pass
