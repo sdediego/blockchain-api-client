@@ -80,5 +80,20 @@ class BlockchainAPIHttpRequest(object):
             msg = 'Error: API URL and parameters must be provided.'
             raise BlockchainAPIHttpRequestError(msg)
 
+    def _https_request(self):
+        encoded_params = {}
+        for key, value in self._params.items():
+            value = str(value).encode(encoding='utf-8')
+            encoded_params.update({key: value})
+
+        http_response = requests.get(self._api_url, params=encoded_params)
+        if http_response.status_code == requests.codes.ok:
+            return http_response
+        else:
+            msg = 'Error: url {}, params {}'.format(self._api_url, self._params)
+            code = http_response.status_code
+            raise BlockchainAPIHttpRequestError(msg, code)
+            
+
 class BlockchainAPIHttpResponse(object):
     pass
