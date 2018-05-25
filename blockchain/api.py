@@ -97,6 +97,13 @@ class BlockchainAPIHttpRequest(object):
             code = http_response.status_code
             raise BlockchainAPIHttpRequestError(msg, code)
 
+    @property
+    def request_url(self):
+        url = '{url}{query}'.format(url=self._api_url, query='?')
+        for key, value in self._params.items():
+            url += '{key}={value}&'.format(key=key, value=value)
+        return url[:-1]
+
 
 class BlockchainAPIHttpResponse(object):
     pass
