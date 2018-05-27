@@ -20,3 +20,10 @@ class BlockchainAPIClientError(BaseError):
     Handle exception for Blockchain API.
     """
     pass
+
+
+class BlockchainAPIHttpRequestError(BaseError):
+    """
+    Handle exception for Blockchain API request error.
+    """
+    pass
