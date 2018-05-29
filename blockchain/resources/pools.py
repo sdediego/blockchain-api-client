@@ -2,6 +2,7 @@
 # encoding: utf-8
 
 import json
+import re
 
 
 class BlockchainAPIPool(object):
@@ -17,7 +18,7 @@ class BlockchainAPIPool(object):
         """
         self._pools = pools
         for key, value in self._pools.items():
-            var_name = key.replace(" ", "").replace(".", "").lower()
+            var_name = re.sub('[^0-9a-zA-Z]+', '', key).lower()
             setattr(self, '_{}'.format(var_name), {'pool': key, 'hashrate': value})
 
     def __str__(self):
@@ -37,7 +38,7 @@ class BlockchainAPIPool(object):
         """
         pool_name = list(filter(lambda name: name == pool, self._pools.keys()))
         if len(pool_name) > 0:
-            var_name = pool_name[0].replace(" ", "").replace(".", "").lower()
+            var_name = re.sub('[^0-9a-zA-Z]+', '', pool_name[0]).lower()
             return vars(self)['_{}'.format(var_name)]
 
         return {}
