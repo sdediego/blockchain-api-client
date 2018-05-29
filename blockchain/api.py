@@ -3,8 +3,16 @@
 
 import configparser
 import os
+import requests
+
+from os.path import dirname, join
+from dotenv import load_dotenv
 
 from .exceptions import BlockchainAPIClientError, BlockchainAPIHttpRequestError
+
+# Load .env file
+dotenv_path = join(dirname(dirname(__file__)), '.env')
+load_dotenv(dotenv_path)
 
 
 class BlockchainAPIClient(object):
