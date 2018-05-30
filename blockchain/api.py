@@ -145,3 +145,8 @@ class BlockchainAPIHttpResponse(object):
             'url': self._url,
         }
         return '<{classname}:\ndata: {data}\nurl: {url}>'.format(**request)
+
+    def _generate_slug(self, response):
+        name = response.get('name') or response.get('_name')
+        response.update({'_slug': slugify(name)})
+        return response
