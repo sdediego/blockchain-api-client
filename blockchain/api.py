@@ -150,3 +150,17 @@ class BlockchainAPIHttpResponse(object):
         name = response.get('name') or response.get('_name')
         response.update({'_slug': slugify(name)})
         return response
+
+    @property
+    def response(self):
+        if self._data != 'charts':
+            response = {
+                '_name': self._data.capitalize(),
+                '_values': self._response,
+            }
+        else:
+            response = self._response
+            response.pop('status', None)
+
+        response = self._generate_slug(response)
+        return response
