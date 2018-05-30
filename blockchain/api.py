@@ -120,4 +120,20 @@ class BlockchainAPIHttpRequest(object):
 
 
 class BlockchainAPIHttpResponse(object):
-    pass
+
+    def __init__(self, data=None, url=None, response=None):
+        self._data = data
+        self._url = url
+        self._response = response
+
+        try:
+            _temp = __import__('blockchain.resources', globals(), locals(), [self._data], 0)
+        except ImportError as msg:
+            logger.error('Error importing response class for %s data: %s', (data, msg))
+
+        _resource = getattr(_temp, self._data, None)
+        classname = getattr(_resource, settings.RESOURCES.get(self._data), None)
+        if callable(classname):
+            setattr(self, '{}'.format(self._data), classname.start(self._response, False))
+        else:
+            logger.error('Error initializing response class for %s data.', data)
