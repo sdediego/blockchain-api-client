@@ -137,3 +137,11 @@ class BlockchainAPIHttpResponse(object):
             setattr(self, '{}'.format(self._data), classname.start(self._response, False))
         else:
             logger.error('Error initializing response class for %s data.', data)
+
+    def __str__(self):
+        request = {
+            'classname': self.__class__.__name__,
+            'data': self._data,
+            'url': self._url,
+        }
+        return '<{classname}:\ndata: {data}\nurl: {url}>'.format(**request)
