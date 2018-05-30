@@ -2,13 +2,19 @@
 # encoding: utf-8
 
 import configparser
+import logging
 import os
 import requests
 
+from logging.config import fileConfig
 from os.path import dirname, join
 from dotenv import load_dotenv
 
 from .exceptions import BlockchainAPIClientError, BlockchainAPIHttpRequestError
+
+# Custom logger
+fileConfig(join(dirname(dirname(__file__)), 'logging.cfg'))
+logger = logging.getLogger(__name__)
 
 # Load .env file
 dotenv_path = join(dirname(dirname(__file__)), '.env')
