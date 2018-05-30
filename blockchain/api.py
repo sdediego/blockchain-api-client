@@ -6,11 +6,13 @@ import logging
 import os
 import requests
 
+from slugify import slugify
 from logging.config import fileConfig
 from os.path import dirname, join
 from dotenv import load_dotenv
 
-from .exceptions import BlockchainAPIClientError, BlockchainAPIHttpRequestError
+from .exceptions import (BlockchainAPIClientError,
+                         BlockchainAPIHttpRequestError)
 
 # Custom logger
 fileConfig(join(dirname(dirname(__file__)), 'logging.cfg'))
