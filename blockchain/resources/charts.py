@@ -36,6 +36,16 @@ class BlockchainAPIChart(object):
         }
         return '<{classname} - {chart}: {description}>'.format(**chart)
 
+    @classmethod
+    def start(cls, chart, keep=False):
+        """
+        Get BlockchainAPIChart class instance.
+
+        :param str data: chart data response.
+        :return cls: BlockchainAPIChart class instance.
+        """
+        return cls(chart, keep)
+
     @property
     def response(self):
         """
