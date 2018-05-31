@@ -44,6 +44,16 @@ class BlockchainAPIStatistics(object):
         return '<{classname} - Bitcoin blockchain statistics>'.format(
                 classname=self.__class__.__name__)
 
+    @classmethod
+    def start(cls, stats, keep=False):
+        """
+        Get BlockchainAPIStatistics class instance.
+
+        :param str data: stats data response.
+        :return cls: BlockchainAPIStatistics class instance.
+        """
+        return cls(stats, keep)
+        
     @property
     def response(self):
         """
