@@ -29,6 +29,16 @@ class BlockchainAPIPool(object):
         """
         return '<{} - Bitcoin pools>'.format(self.__class__.__name__)
 
+    @classmethod
+    def start(cls, pools, *args, **kwargs):
+        """
+        Get BlockchainAPIPool class instance.
+
+        :param str data: pools data response.
+        :return cls: BlockchainAPIPool class instance.
+        """
+        return cls(pools, *args, **kwargs)
+        
     def get_info(self, pool):
         """
         Get pool hash rate distribution information.
