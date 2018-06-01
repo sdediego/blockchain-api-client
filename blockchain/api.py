@@ -122,12 +122,26 @@ class BlockchainAPIClient(object):
 
 
 class BlockchainAPIHttpRequest(object):
+    """
+    Enable Blockchain API data request.
+    """
 
     def __init__(self, api_url=None, params=None):
+        """
+        Initialize request to Blockchain API.
+
+        :param str api_url: blockchain api requested url.
+        :param dict params: blockchain api url needed params.
+        """
         self._api_url = api_url
         self._params = params
 
     def __str__(self):
+        """
+        Represent class via params string.
+
+        :return str: class representarion.
+        """
         request = {
             'classname': self.__class__.__name__,
             'url': self._api_url,
@@ -136,8 +150,13 @@ class BlockchainAPIHttpRequest(object):
         return '<{classname}:\nurl: {url}\nparams: {params}>'.format(**request)
 
     def fetch_json_response(self):
+        """
+        Retrieve json object from API url.
+
+        :return tuple: requested url and json response.
+        """
         if self._api_url is not None and self._params is not None:
-            http_response = self._https_request()
+            http_response = self._http_request()
             request_url = http_response.url
             json_response = http_response.json()
             return request_url, json_response
@@ -146,9 +165,17 @@ class BlockchainAPIHttpRequest(object):
             raise BlockchainAPIHttpRequestError(msg)
 
     def fetch_csv_response(self):
+        """
+        Retrieve csv object from api url.
+        """
         pass
 
-    def _https_request(self):
+    def _http_request(self):
+        """
+        Make http request to Blockchain API.
+
+        :return obj: http object response.
+        """
         encoded_params = {}
         for key, value in self._params.items():
             value = str(value).encode(encoding='utf-8')
@@ -164,6 +191,11 @@ class BlockchainAPIHttpRequest(object):
 
     @property
     def request_url(self):
+        """
+        Get request url to Blockchain API.
+
+        :return str: request url.
+        """
         url = '{url}{query}'.format(url=self._api_url, query='?')
         for key, value in self._params.items():
             url += '{key}={value}&'.format(key=key, value=value)
