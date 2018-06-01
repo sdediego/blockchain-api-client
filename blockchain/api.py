@@ -203,8 +203,18 @@ class BlockchainAPIHttpRequest(object):
 
 
 class BlockchainAPIHttpResponse(object):
+    """
+    Enable Blockchain API response data parsing.
+    """
 
     def __init__(self, data=None, url=None, response=None):
+        """
+        Initialize Blockchain API response parsing.
+
+        :param str data: type of fetched data (charts, stats, pools).
+        :param str url: requested Blockchain API url.
+        :param dict response: http json response.
+        """
         self._data = data
         self._url = url
         self._response = response
@@ -222,6 +232,11 @@ class BlockchainAPIHttpResponse(object):
             logger.error('Error initializing response class for %s data.', data)
 
     def __str__(self):
+        """
+        Represent class via params string.
+
+        :return str: class representarion.
+        """
         request = {
             'classname': self.__class__.__name__,
             'data': self._data,
@@ -230,12 +245,23 @@ class BlockchainAPIHttpResponse(object):
         return '<{classname}:\ndata: {data}\nurl: {url}>'.format(**request)
 
     def _generate_slug(self, response):
+        """
+        Generate slug in retrieved response.
+
+        :param json response: Blockchain API response.
+        :return json: Blockchain API response with slug field.
+        """
         name = response.get('name') or response.get('_name')
         response.update({'_slug': slugify(name)})
         return response
 
     @property
     def response(self):
+        """
+        Get homogeneous response from Blockchain API.
+
+        :return json: Blockchain API response with slug field.
+        """
         if self._data != 'charts':
             response = {
                 '_name': self._data.capitalize(),
