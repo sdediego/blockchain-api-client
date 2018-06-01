@@ -25,14 +25,29 @@ load_dotenv(dotenv_path)
 
 
 class BlockchainAPIClient(object):
+    """
+    Enable Blockchain API use.
+    """
 
     def __init__(self, data, api_url, api_key=None):
+        """
+        Initialize Blockchain API Client. If no API key provided there is a
+        limit on the number of calls.
+
+        :param str data: type of data to fetch (charts, stats, pools).
+        :param str api_key: Key for unlimited calls to the API.
+        """
         self._api_data = data
         self._api_url = api_url
         self._api_key = api_key
         self._request_params = {}
 
     def __str__(self):
+        """
+        Represent class via params string.
+
+        :return str: class representarion.
+        """
         params = {
             'classname': self.__class__.__name__,
             'data': self._api_data
@@ -43,6 +58,14 @@ class BlockchainAPIClient(object):
 
     @classmethod
     def config(cls, data=None, filename='blockchain.cfg', section='api'):
+        """
+        Get BlockchainAPIClient class instance.
+
+        :param str data: type of data to fetch (charts, stats, pools).
+        :param str filename: Blockchain API Client configuration filename.
+        :param str section: filename section to parse.
+        :return cls: BlockchainAPIClient class instance.
+        """
         parser = configparser.ConfigParser()
         parser.read(filename)
         if parser.has_section(section):
@@ -55,6 +78,12 @@ class BlockchainAPIClient(object):
             raise BlockchainAPIClientError(msg)
 
     def _set_request_params(self, *args, **kwargs):
+        """
+        Set request parameters for api url.
+
+        :param list args: list of arguments.
+        :param dict kwargs: dict of keyword arguments.
+        """
         for key, value in kwargs.items():
             if value is not None:
                 self._request_params.update({key: value})
@@ -63,6 +92,25 @@ class BlockchainAPIClient(object):
             self._request_params.update({'api_code': self._api_key})
 
     def call(self, *args, **kwargs):
+        """
+        Make request of data behind Blockchain API.
+
+        1. Chart data:
+        :param str chart: requested chart name.
+        :param str timespan: duration of the chart.
+        :param str rollingAverage: duration over which data should be averaged.
+        :param datetime start: datetime at which to start the chart.
+        :param str format: either json or csv.
+        :param bool sampled: limits the number of datapoints returned if true.
+        :return json: request result.
+
+        2. Statistics data:
+        :return json: request result.
+
+        3. Pools data:
+        :param str timespan: duration over which data is computed.
+        :return json: request result.
+        """
         if self._api_data == 'charts' and 'chart' in kwargs:
             self._api_url += '/{}'.format(kwargs.pop('chart'))
 
