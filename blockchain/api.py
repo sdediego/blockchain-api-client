@@ -11,6 +11,7 @@ from logging.config import fileConfig
 from os.path import dirname, join
 from dotenv import load_dotenv
 
+from . import settings
 from .exceptions import (BlockchainAPIClientError,
                          BlockchainAPIHttpRequestError)
 
