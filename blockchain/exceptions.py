@@ -27,3 +27,10 @@ class BlockchainAPIHttpRequestError(BaseError):
     Handle exception for Blockchain API request error.
     """
     pass
+
+
+class JSONFileWriterPipelineError(BaseError):
+    """
+    Handle exception for JSON file writer error.
+    """
+    pass
