@@ -14,3 +14,16 @@ class JSONFileWriterPipeline(object):
         :param str filepath: json file path.
         """
         self._file = path
+
+    def __str__(self):
+        """
+        Represent class via params string.
+
+        :return str: class representation.
+        """
+        params = {
+            'class': self.__class__.__name__,
+            'path': dirname(self._file),
+            'filename': basename(self._file),
+        }
+        return str(params)
