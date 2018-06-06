@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
+import json
 import os
 
 from dotenv import load_dotenv
@@ -51,3 +52,11 @@ class JSONFileWriterPipeline(object):
         else:
             msg = 'Incorrect JSON file configuration: {}'.format(filepath)
             raise ValueError(msg)
+
+    def write(self, data):
+        """
+        Open file connection and write data.
+        """
+        with open(self._file, 'a') as json_file:
+            json.dump(data, json_file, indent=2)
+            json.dump('\n\n')
