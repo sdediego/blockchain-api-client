@@ -5,6 +5,8 @@ import json
 import os
 
 from dotenv import load_dotenv
+from functools import partial
+from json import JSONDecoder
 from logging.config import fileConfig
 from os.path import dirname, join
 
@@ -69,3 +71,24 @@ class JSONFileWriterPipeline(object):
         """
         with open(self._file, 'r') as json_file:
             return list(self._parse(json_file))
+
+    def _parse(self, file, decoder=JSONDecoder(), delimeter='\n', buffer_size=2048):
+        """
+        Yield complete JSON objects as the parser finds them.
+
+        :param obj file: json file object to parse.
+        :param obj decoder: json decoder instance.
+        :param str delimeter: json objects delimeter in file.
+        :param int buffer_size: buffer size in bytes.
+        """
+        buffer = ''
+        for chunk in iter(partial(file.read, buffer_size), ''):
+            buffer += chunk
+            while buffer:
+                try:
+                    stripped = buffer.strip(delimeter)
+                    result, index = decoder.raw_decode(stripped)
+                    yield result
+                    buffer = stripped[index:]
+                except ValueError:
+                    break
