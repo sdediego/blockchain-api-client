@@ -125,3 +125,21 @@ class MongoDBPipeline(object):
             'collection': self._mongo_collection,
         }
         return str(params)
+
+    @classmethod
+    def config(cls):
+        """
+        Get MongoDB configuration parameters.
+
+        :return cls: MongoDBPipeline class.
+        """
+        mongo_config = {
+            'mongo_url': os.getenv('MONGO_URL'),
+            'mongo_db': os.getenv('MONGO_DB'),
+            'mongo_collection': os.getenv('MONGO_COLLECTION'),
+        }
+        if None not in mongo_config.values():
+            return cls(**mongo_config)
+        else:
+            msg = 'Incorrect MongoDB configuration: {}'.format(mongo_config)
+            raise ValueError(msg)
