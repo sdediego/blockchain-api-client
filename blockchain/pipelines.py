@@ -111,3 +111,17 @@ class MongoDBPipeline(object):
         self._mongo_db = mongo_db
         self._mongo_collection = mongo_collection
         self._mongo_uri = self._mongo_url + self._mongo_db
+
+    def __str__(self):
+        """
+        Represent class via params string.
+
+        :return str: class representarion.
+        """
+        params = {
+            'classname': self.__class__.__name__,
+            'url': self._mongo_url,
+            'db': self._mongo_db,
+            'collection': self._mongo_collection,
+        }
+        return str(params)
