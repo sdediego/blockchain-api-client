@@ -92,3 +92,22 @@ class JSONFileWriterPipeline(object):
                     buffer = stripped[index:]
                 except ValueError:
                     break
+
+
+class MongoDBPipeline(object):
+    """
+    Enable persist data in MongoDB.
+    """
+
+    def __init__(self, mongo_url, mongo_db, mongo_collection):
+        """
+        Initialize MongoDB class config.
+
+        :param str mongo_uri: MongoDB identifier.
+        :param str mongo_db: MongoDB name.
+        :param str mongo_collection: MongoDB collection name.
+        """
+        self._mongo_url = mongo_url
+        self._mongo_db = mongo_db
+        self._mongo_collection = mongo_collection
+        self._mongo_uri = self._mongo_url + self._mongo_db
