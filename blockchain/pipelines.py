@@ -3,12 +3,14 @@
 
 import json
 import os
+import pymongo
 
 from dotenv import load_dotenv
 from functools import partial
 from json import JSONDecoder
 from logging.config import fileConfig
 from os.path import dirname, join
+from pymongo.errors import ConnectionFailure
 
 # Load .env file
 dotenv_path = join(dirname(dirname(__file__)), '.env')
@@ -143,3 +145,13 @@ class MongoDBPipeline(object):
         else:
             msg = 'Incorrect MongoDB configuration: {}'.format(mongo_config)
             raise ValueError(msg)
+
+    def open_connection(self):
+        """
+        Establish MongoDB client connection.
+        """
+        self.client = pymongo.MongoClient(self._mongo_uri)
+        if self.client is None:
+            raise ConnectionFailure('No client connection: {}').format(self._mongo_uri)
+        self.db = self.client[self._mongo_db]
+        self.collection = self.db[self._mongo_collection]
