@@ -155,3 +155,9 @@ class MongoDBPipeline(object):
             raise ConnectionFailure('No client connection: {}').format(self._mongo_uri)
         self.db = self.client[self._mongo_db]
         self.collection = self.db[self._mongo_collection]
+
+    def close_connection(self):
+        """
+        Close MongoDB client connection.
+        """
+        self.client.close()
