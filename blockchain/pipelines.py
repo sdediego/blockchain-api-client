@@ -177,3 +177,19 @@ class MongoDBPipeline(object):
         self.collection.insert_one(data)
         logger.info('Data inserted to MongoDB: %s', data)
         return data
+
+    def _update(self, data):
+        """
+        Update data in MongoDB.
+
+        :param json data: json data to update.
+        :return json: updated data in MongoDB.
+        """
+        criteria = data.get('_slug', None)
+        if criteria is not None:
+            self.collection.update_one({'_slug': criteria}, {'$set': data})
+            logger.info('Data updated to MongoDB: %s', data)
+            return data.update({'_slug': criteria})
+
+        logger.error('Failed to update data to MongoDB: %s', data)
+        return False
