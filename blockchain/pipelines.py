@@ -2,6 +2,7 @@
 # encoding: utf-8
 
 import json
+import logging
 import os
 import pymongo
 
@@ -11,6 +12,10 @@ from json import JSONDecoder
 from logging.config import fileConfig
 from os.path import dirname, join
 from pymongo.errors import ConnectionFailure
+
+# Custom logger
+fileConfig(join(dirname(dirname(__file__)), 'logging.cfg'))
+logger = logging.getLogger(__name__)
 
 # Load .env file
 dotenv_path = join(dirname(dirname(__file__)), '.env')
@@ -161,3 +166,14 @@ class MongoDBPipeline(object):
         Close MongoDB client connection.
         """
         self.client.close()
+
+    def _insert(self, data):
+        """
+        Insert data in MongoDB.
+
+        :param json data: json data to insert.
+        :return json: inserted data in MongoDB.
+        """
+        self.collection.insert_one(data)
+        logger.info('Data inserted to MongoDB: %s', data)
+        return data
