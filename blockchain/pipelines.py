@@ -193,3 +193,26 @@ class MongoDBPipeline(object):
 
         logger.error('Failed to update data to MongoDB: %s', data)
         return False
+
+    def persist_data(self, data):
+        """
+        Persist data in MongoDB.
+
+        :param json data: json data to persist.
+        :return json: persisted data in MongoDB.
+        """
+        for key, value in data.items():
+            if not value:
+                raise ValueError('Missing value for: {}'.format(key))
+
+        try:
+            data_found = self.collection.find_one(
+                {'_slug': data.get('_slug')},
+                {'_slug': 1, '_id': 0}
+            )
+            if data_found:
+                return self._update(data)
+            return self._insert(data)
+
+        except PyMongoError as msg:
+            logger.error('Database operation failure: %s', msg)
