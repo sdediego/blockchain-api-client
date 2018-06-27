@@ -194,6 +194,22 @@ class MongoDBPipeline(object):
         logger.error('Failed to update data to MongoDB: %s', data)
         return False
 
+    def _delete(self, data):
+        """
+        Delete data in MongoDB.
+
+        :param json data: json data to delete.
+        :return json: deleted data in MongoDB.
+        """
+        criteria = data.get('_slug')
+        if criteria is not None:
+            self.collection.delete_one({'_slug': criteria})
+            logger.info('Data deleted from MongoDB: %s', data)
+            return data
+
+        logger.info('Failed to delete data from MongoDB: %s', data)
+        return False
+
     def persist_data(self, data):
         """
         Persist data in MongoDB.
