@@ -232,3 +232,16 @@ class MongoDBPipeline(object):
 
         except PyMongoError as msg:
             logger.error('Database operation failure: %s', msg)
+
+    @property
+    def configuration(self):
+        """
+        Show database configuration parameters.
+
+        :return dict: MongoDB configuration.
+        """
+        return {
+            'url': self._mongo_url,
+            'database': self._mongo_db,
+            'collection': self._mongo_collection,
+        }
