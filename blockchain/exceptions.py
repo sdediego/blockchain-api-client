@@ -34,3 +34,10 @@ class JSONFileWriterPipelineError(BaseError):
     Handle exception for JSON file writer error.
     """
     pass
+
+
+class MongoDBPipelineError(BaseError):
+    """
+    Handle exception for MongoDB pipeline error.
+    """
+    pass
