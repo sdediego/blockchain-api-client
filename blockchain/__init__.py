@@ -7,7 +7,8 @@ __version__ = '1.0'
 __date__ = 'March 2018'
 
 __all__ = [
-    'BlockchainAPIClient', 'BlockchainAPIHttpRequest', 'BlockchainAPIHttpResponse',
-    'BaseError', 'BlockchainAPIClientError', 'BlockchainAPIHttpRequestError',
-    'JSONFileWriterPipeline', 'MongoDBPipeline'
+    'BlockchainAPIClient', 'BlockchainAPIHttpRequest',
+    'BlockchainAPIHttpResponse', 'BaseError', 'BlockchainAPIClientError',
+    'BlockchainAPIHttpRequestError', 'JSONFileWriterPipelineError',
+    'MongoDBPipelineError', 'JSONFileWriterPipeline', 'MongoDBPipeline'
 ]
