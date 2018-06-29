@@ -245,3 +245,10 @@ class MongoDBPipeline(object):
             'database': self._mongo_db,
             'collection': self._mongo_collection,
         }
+
+
+class PostgreSQLPipeline(object):
+    """
+    Enable persist data in PostgreSQL database.
+    """
+    pass
