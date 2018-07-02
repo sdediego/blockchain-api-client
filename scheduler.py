@@ -13,4 +13,18 @@ logger = logging.getLogger(__name__)
 
 scheduler = BlockingScheduler()
 
+
+@scheduler.scheduled_job()
+def charts_job():
+    pass
+
+@scheduler.scheduled_job()
+def stats_job():
+    pass
+
+@scheduler.scheduled_job()
+def pools_job():
+    pass
+
+# Start queueing jobs
 scheduler.start()
