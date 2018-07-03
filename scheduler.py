@@ -35,9 +35,10 @@ def fetch_and_persist_data(data, *args, **kwargs):
 def charts_job():
     pass
 
-@scheduler.scheduled_job()
+@scheduler.scheduled_job(id='stats', trigger='cron', day_of_week='mon-sun', hour=0)
 def stats_job():
-    pass
+    logger.info('Fetching blockchain statistical data.')
+    fetch_and_persist_data('stats')
 
 @scheduler.scheduled_job(id='pools', trigger='cron', day_of_week='mon-sun', hour=0)
 def pools_job():
