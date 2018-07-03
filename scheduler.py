@@ -2,6 +2,7 @@
 # encoding: utf-8
 
 import logging
+import time
 
 from apscheduler.schedulers.blocking import BlockingScheduler
 from logging.config import fileConfig
@@ -17,6 +18,19 @@ logger = logging.getLogger(__name__)
 scheduler = BlockingScheduler()
 
 
+def fetch_and_persist_data(data, *args, **kwargs):
+    # Retrieve blockchain data
+    api = BlockchainAPIClient(data)
+    result = api.call(**kwargs)
+    # Persist retrieved data
+    logger.info('Persisting fetched data in MongoDB: %s', result)
+    mongo = MongoDBPipeline.config()
+    mongo.open_connection()
+    mongo.persist_data(result.response)
+    mongo.close_connection()
+    logger.info('Data successfully persisted.')
+    time.sleep(2)
+
 @scheduler.scheduled_job()
 def charts_job():
     pass
@@ -28,16 +42,7 @@ def stats_job():
 @scheduler.scheduled_job(id='pools', trigger='cron', day_of_week='mon-sun', hour=0)
 def pools_job():
     logger.info('Fetching bitcoin mining pools data.')
-
-    api = BlockchainAPIClient('pools')
-    result = api.call(timespan='5days')
-
-    logger.info('Persisting fetched data in MongoDB: %s', result)
-    mongo = MongoDBPipeline.config()
-    mongo.open_connection()
-    mongo.persist_data(result.response)
-    mongo.close_connection()
-    logger.info('Data successfully persisted.')
+    fetch_and_persist_data('pools', timespan='5days')
 
 # Start queueing jobs
 scheduler.start()
