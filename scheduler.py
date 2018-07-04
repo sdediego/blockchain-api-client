@@ -33,7 +33,9 @@ def fetch_and_persist_data(data, *args, **kwargs):
 
 @scheduler.scheduled_job()
 def charts_job():
-    pass
+    for chart in settings.CHARTS:
+        logger.info('Fetching %s chart data.', chart)
+        fetch_and_persist_data('charts', chart=chart, timespan='all')
 
 @scheduler.scheduled_job(id='stats', trigger='cron', day_of_week='mon-sun', hour=0)
 def stats_job():
