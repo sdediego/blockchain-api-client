@@ -37,7 +37,7 @@ def fetch_and_persist_data(data, *args, **kwargs):
     logger.info('Data successfully persisted.')
     time.sleep(2)
 
-@scheduler.scheduled_job()
+@scheduler.scheduled_job(id='charts', trigger='cron', day_of_week='mon-sun', hour=0)
 def charts_job():
     """
     Get and save blockchain charts data from Blockchain API.
