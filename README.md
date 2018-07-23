@@ -35,6 +35,8 @@ Blockchain API Client uses a number of open source projects to work properly:
 
 And of course Blockchain API Client itself is open source with a [public repository][blockchain-api-client] on GitHub.
 
+#### Installation
+
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen.)
 
 [apscheduler]: <https://github.com/agronholm/apscheduler>
