@@ -69,6 +69,13 @@ api = BlockchainAPIClient('pools')
 result = api.call(timespan='5days')
 ```
 
+Persist data in JSON file
+```python
+from blockchain.pipelines import JSONFileWriterPipeline
+file = JSONFileWriterPipeline.config()
+file.write(response)
+```
+
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen.)
 
 [apscheduler]: <https://github.com/agronholm/apscheduler>
