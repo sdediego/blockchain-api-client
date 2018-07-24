@@ -85,6 +85,8 @@ mongo.persist_data(result)
 mongo.close_connection()
 ```
 
+For a complete description of available parameters please check [Blockchain API documentation][official docs]
+
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen.)
 
 [apscheduler]: <https://github.com/agronholm/apscheduler>
@@ -97,3 +99,4 @@ mongo.close_connection()
 [pymongo]: <https://github.com/mongodb/mongo-python-driver>
 [python-dotenv]: <https://github.com/theskumar/python-dotenv>
 [requests]: <https://github.com/requests/requests>
+[official docs]: <https://blockchain.info/api/charts_api>
