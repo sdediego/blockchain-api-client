@@ -87,6 +87,14 @@ mongo.close_connection()
 
 For a complete description of available parameters please check [Blockchain API documentation][official docs]
 
+License
+----
+
+MIT
+
+
+**Free Software, Hell Yeah!**
+
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen.)
 
 [apscheduler]: <https://github.com/agronholm/apscheduler>
