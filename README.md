@@ -76,6 +76,15 @@ file = JSONFileWriterPipeline.config()
 file.write(response)
 ```
 
+Persist (save/update) data with MongoDB
+```python
+from blockchain.pipelines import MongoDBPipeline
+mongo = MongoDBPipeline.config()
+mongo.open_connection()
+mongo.persist_data(result)
+mongo.close_connection()
+```
+
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen.)
 
 [apscheduler]: <https://github.com/agronholm/apscheduler>
