@@ -45,28 +45,28 @@ Get historical price for Bitcoin in json format
 ```python
 from blockchain.api import BlockchainAPIClient
 api = BlockchainAPIClient('charts')
-result = api.call(chart='market-price', timespan='all')
+response = api.call(chart='market-price', timespan='all')
 ```
 
 Get market capitalization for Bitcoin in json format
 ```python
 from blockchain.api import BlockchainAPIClient
 api = BlockchainAPIClient('charts')
-result = api.call(chart='market-cap', timespan='all')
+response = api.call(chart='market-cap', timespan='all')
 ```
 
 Get Bitcoin blockchain statistics in json format
 ```python
 from blockchain.api import BlockchainAPIClient
 api = BlockchainAPIClient('stats')
-result = api.call()
+response = api.call()
 ```
 
 Get Bitcoin minig pools info in json format
 ```python
 from blockchain.api import BlockchainAPIClient
 api = BlockchainAPIClient('pools')
-result = api.call(timespan='5days')
+response = api.call(timespan='5days')
 ```
 
 Persist data in JSON file
@@ -81,7 +81,7 @@ Persist (save/update) data with MongoDB
 from blockchain.pipelines import MongoDBPipeline
 mongo = MongoDBPipeline.config()
 mongo.open_connection()
-mongo.persist_data(result)
+mongo.persist_data(response)
 mongo.close_connection()
 ```
 
