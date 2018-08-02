@@ -23,10 +23,11 @@ def find_version(*path_parts):
 
 
 setup(
-    name='blockchain-api-client',
+    name='blockchain-client',
     verbose_name='Blockchain API Client written in Python 3',
+    packages=['blockchain-client'],
     author='Sergio de Diego',
-    version=find_version('blockchainAPI', '__init__.py'),
+    version=find_version('blockchain', '__init__.py'),
     description='Blockchain statistics and market data fetcher client',
     long_description=read('README.md'),
     url='https://github.com/sdediego/blockchain-api-client',
